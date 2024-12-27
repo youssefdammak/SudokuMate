@@ -32,4 +32,55 @@ nav a{
 /*when the cursor is placed on the link it changes color*/
 nav a:hover {
     color: #1abc9c;
-  }
+}
+#firstBox{
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 20px;
+    border-radius:8px ;
+}
+#firstBox h1{
+    font-size: 2.5em;
+    color: #2c3e50;
+}
+#firstBox p{
+    font-size: 1.2em;
+    color: #555;
+}
+#secondBox{
+    display: flex;
+    justify-content: space-around;/*space between before and after each container*/
+    padding: 40px 20px;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.sections{
+    width: 30%;/*each section takes 30% of the sections box*/
+    text-align: center;
+}
+.sections h2{
+    font-size: 2em;
+    color: #2c3e50;
+}
+.sections p{
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.5;/*line seperation*/
+}
+.main-button{
+    background-color: #1abc9c;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.main-button:hover{
+    background-color: #16a085;
+}
