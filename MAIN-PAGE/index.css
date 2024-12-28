@@ -98,3 +98,54 @@ footer a{
 footer a:hover{
     color: #16a085;
 }
+#hamburger{
+    display: none;/*hidden on normal screen*/
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 7px;
+}
+#hamburger div{
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+@media (max-width:800px){
+    #secondBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        background-color: #fff;
+        margin: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .sections{
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    #hamburger{
+        display: flex;
+    }
+    nav{
+        display: none;
+    }
+    nav.hidden{
+        display: flex;
+        flex-direction: column;
+        background-color: #2c3e50;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        padding: 20px 0;
+    }
+    
+    nav.hidden a {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+}
