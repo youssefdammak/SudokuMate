@@ -29,58 +29,117 @@ nav a{
     text-decoration: none;
     transition: color 0.3s;/*for the cursor placement animation (applied on the color change for .3s)*/
 }
+/*when the cursor is placed on the link it changes color*/
 nav a:hover {
-    color: #1abc9c;/*when the cursor is placed on the link it changes color*/
+    color: #1abc9c;
 }
-#firstBox{
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    margin: 20px;
-    border-radius:8px ;
-}
-#firstBox h1{
-    font-size: 2.5em;
+.solo-game h1 {
+    font-size: 1.8em;
     color: #2c3e50;
-}
-#firstBox p{
-    font-size: 1.2em;
-    color: #555;
-}
-#secondBox{
-    display: flex;
-    justify-content: space-around;/*space between before and after each container*/
-    padding: 40px 20px;
-    background-color: #fff;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-.sections{
-    width: 30%;/*each section takes 30% of the sections box*/
     text-align: center;
 }
-.sections h2{
-    font-size: 2em;
-    color: #2c3e50;
-}
-.sections p{
+.solo-game p{
     font-size: 1.1em;
     color: #555;
-    line-height: 1.5;/*line seperation*/
+    text-align: center;
 }
-.main-button{
+.difficulty{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.difficulty button {
+    padding: 10px 20px;
+    font-size: 16px;
     background-color: #1abc9c;
     color: white;
-    padding: 12px 25px;
     border: none;
     border-radius: 5px;
-    font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
-.main-button:hover{
+.difficulty button:hover{
+    background-color: #16a085;
+}
+.lobby-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.lobby-buttons button{
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.lobby-buttons button:hover{
+    background-color: #16a085;
+}
+#username{
+    display: flex;
+    justify-content: center;
+}
+#username input{
+    border: 2px solid #16a085;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#username input:focus{
+    outline: none;
+    border-color: #16a085;
+}
+.sudoku-grid{
+    display: grid;
+    grid-template-columns: repeat(9,40px);
+    grid-template-rows: repeat(9,40px);
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 7px;
+}
+.sudoku-grid div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+}
+.sudoku-grid div input{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #16a085;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+.game-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+.game-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.game-buttons button:hover{
     background-color: #16a085;
 }
 footer{

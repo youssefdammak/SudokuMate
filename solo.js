@@ -5,6 +5,7 @@ const N=9;
 hamburger.addEventListener('click', function () {
   mobileNav.classList.toggle('hidden');
 });
+
 function renderGrid(puzzle) {
     const gridElement = document.getElementById('sudoku-grid');
     gridElement.innerHTML = '';
@@ -28,21 +29,16 @@ function renderGrid(puzzle) {
     }
   }
 function isSafe(grid, row, col, num) {
-    // Check the row
     for (let x = 0; x < N; x++) {
         if (grid[row][x] === num) {
             return false;
         }
     }
-
-    // Check the column
     for (let x = 0; x < N; x++) {
         if (grid[x][col] === num) {
             return false;
         }
     }
-
-    // Check the 3x3 subgrid
     const startRow = Math.floor(row / 3) * 3;
     const startCol = Math.floor(col / 3) * 3;
     for (let i = 0; i < 3; i++) {
@@ -52,8 +48,7 @@ function isSafe(grid, row, col, num) {
             }
         }
     }
-
-    return true; // It's safe to place the number
+    return true;
 }
 function solve(grid) {
     for (let row = 0; row < N; row++) {

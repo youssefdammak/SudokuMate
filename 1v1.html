@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="solo.css">
+    <link rel="stylesheet" href="1v1.css">
 </head>
 <body>
     <header>
@@ -23,8 +23,15 @@
         </div>
     </header>
     <section class="solo-game">
-        <h1>Solo Sudoku Game</h1>
-        <p>Play Sudoku at your own pace. Choose your difficulty level and enjoy the challenge!</p>
+        <h1>1v1 Sudoku Game</h1>
+        <p>Challenge your friends in a fast-paced 1v1 Sudoku competition!</p>
+        <div class="lobby-buttons">
+            <button id="create-room">Create Room</button>
+            <button id="join-room">Join Room</button>
+        </div>
+        <div  id="username" >
+            <input type="text" placeholder="Enter your username">
+        </div>
         <div class="difficulty">
             <button id="easy">Easy</button>
             <button id="medium">Medium</button>
@@ -33,14 +40,12 @@
         <div id="sudoku-grid" class="sudoku-grid"></div>
         <div class="game-buttons">
             <button id="validate">Validate</button>
-            <button id="reset">Reset</button>
-            <button id="solution">Solution</button>
         </div>
     </section>
     <footer>
         <p>&copy; 2024 SudokuMate. All rights reserved.</p>
         <p>Follow me on <a href="#">Github</a>, <a href="#">Linkedin</a>.</p>
     </footer>
-    <script src="solo.js"></script>
+    <script src="1v1.js"></script>
 </body>
 </html>
