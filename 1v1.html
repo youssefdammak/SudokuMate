@@ -25,14 +25,23 @@
     <section class="solo-game">
         <h1>1v1 Sudoku Game</h1>
         <p>Challenge your friends in a fast-paced 1v1 Sudoku competition!</p>
-        <div class="lobby-buttons">
+        <div id="lobby-buttons" >
             <button id="create-room">Create Room</button>
             <button id="join-room">Join Room</button>
         </div>
         <div  id="username" >
             <input type="text" placeholder="Enter your username">
+            <button id="continue">Continue</button>
         </div>
-        <div class="difficulty">
+        <div id="joinroom">
+            <input type="text" placeholder="Enter Room ID">
+            <button id="join">Join</button>
+        </div>
+        <div id="createroom">
+            <p>Share this room id with you opponent</p>
+            <div id="room-id"></div>
+        </div>
+        <div id="difficulty" class="difficulty">
             <button id="easy">Easy</button>
             <button id="medium">Medium</button>
             <button id="hard">Hard</button>
