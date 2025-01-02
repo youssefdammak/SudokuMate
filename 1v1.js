@@ -31,7 +31,15 @@ function renderGrid(puzzle) {
       gridElement.appendChild(cell);
     }
   }
-
+function grid_to_string(grid){
+  let puzzle="";
+  for(let i=0;i<9;i++){
+      for(let j=0;j<9;j++){
+          puzzle+=String(grid[i][j]);
+      }
+  }
+  return puzzle;
+}
 
 /*---------------------*/
 
@@ -52,6 +60,7 @@ const continueBtn=document.getElementById('continue');
 const room_id=document.getElementById('room-id');
 const ready=document.getElementById('ready');
 const readyBtn=document.getElementById('readyBtn');
+const validateBtn=document.getElementById('validate');
 
 lobbyButtons.style.display='flex';
 createRoomBtn.addEventListener('click', () => {
@@ -71,7 +80,7 @@ createRoomBtn.addEventListener('click', () => {
             }
             username.style.display = 'none';
             createRoom.style.display = 'flex';
-            socket.emit('createRoom', 25, usernameValue);
+            socket.emit('createRoom', 0, usernameValue);
 
             socket.on('roomCreated', (roomId) => {
                 console.log(`Room created with ID: ${roomId}`);
@@ -143,6 +152,29 @@ readyBtn.addEventListener('click',()=>{
     ready.style.display='none';
 });
 const game_header=document.getElementById('game-header');
-socket.on('startGame',(puzzle)=>{
+socket.on('startGame',(puzzle,roomId)=>{
     renderGrid(puzzle);
+    validateBtn.addEventListener('click',()=>{
+        const input=document.querySelectorAll('.empty');
+        userPuzzle="";
+        let j=0;
+        for(let i=0 ;i<puzzle.length;i++){
+            if (puzzle[i]==='0'){
+                userPuzzle+=input[j].value ||'0';
+                j+=1
+            }
+            else{
+                userPuzzle+=puzzle[i];
+            }
+        }
+        socket.emit('validateSolution',userPuzzle,roomId,socket.id);
+    });
+});
+socket.on('winner',(username)=>{
+    alert(username+' Solved the puzzle! 🎉');
+    const gridElement = document.getElementById('sudoku-grid');
+    gridElement.innerHTML = '';
+});
+socket.on('tryAgain',()=>{
+    alert("Incorrect. Try again! ❌");
 });

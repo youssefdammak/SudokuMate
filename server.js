@@ -274,6 +274,8 @@ io.on('connection',(socket)=>{
       usernames: [username],
       puzzleDifficulty : difficulty,
       readyCount:0,
+      grid: null,
+      puzzle:null,
     };
     console.log(`Room created: ${roomId} with difficulty ${difficulty}`);
     socket.emit('roomCreated', roomId);
@@ -302,12 +304,31 @@ io.on('connection',(socket)=>{
         console.log(`Player ready in room: ${roomId}, Ready count: ${rooms[roomId].readyCount}`);
 
         if (rooms[roomId].readyCount === 2) {
-            grid=generateSudoku(rooms[roomId].puzzleDifficulty);
-            puzzle=grid_to_string(grid);
-            io.to(roomId).emit('startGame', puzzle); // Emit puzzle when both players are ready
+            const grid=generateSudoku(rooms[roomId].puzzleDifficulty);
+            const puzzle=grid_to_string(grid);
+            rooms[roomId].grid=grid;
+            rooms[roomId].puzzle=puzzle;
+            io.to(roomId).emit('startGame', puzzle,roomId); // Emit puzzle when both players are ready
         }
     }
-});
+  });
+  socket.on('validateSolution',(userPuzzle,roomId,playerId)=>{
+    solve(rooms[roomId].grid);
+    solvedPuzzle=grid_to_string(rooms[roomId].grid);
+    if(solvedPuzzle===userPuzzle && rooms[roomId].players[0]===playerId){
+      io.to(roomId).emit('winner', rooms[roomId].usernames[0]);
+    }
+    else if(solvedPuzzle===userPuzzle && rooms[roomId].players[1]===playerId){
+      io.to(roomId).emit('winner', rooms[roomId].usernames[1]);
+    }
+    else if(rooms[roomId].players[0]===playerId){
+      io.to(rooms[roomId].players[0]).emit('tryAgain');
+    }
+    else{
+      io.to(rooms[roomId].players[1]).emit('tryAgain');
+    }
+  });
+  
 });
 
 
