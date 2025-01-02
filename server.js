@@ -266,29 +266,44 @@ let rooms = {}; // Object to track rooms and their players
 io.on('connection',(socket)=>{
   console.log('A user connected :',socket.id);
   
-  socket.on('createRoom',()=>{
+  socket.on('createRoom',(difficulty)=>{
     const roomId=Math.random().toString(36).substring(2,6);
     socket.join(roomId);
-    rooms[roomId]=[socket.id];
-    console.log(`Room created: ${roomId}`);
+    rooms[roomId]={
+      players : [socket.id],
+      puzzleDifficulty : difficulty,
+      readyCount:0,
+    };
+    console.log(`Room created: ${roomId} with difficulty ${difficulty}`);
     socket.emit('roomCreated', roomId);
   });
 
   socket.on('joinRoom',(roomId)=>{
-    if(rooms[roomId] && rooms[roomId].length<2){
+    if(rooms[roomId] && rooms[roomId].players.length<2){
       socket.join(roomId);
-      rooms[roomId].push(socket.id);
+      rooms[roomId].players.push(socket.id);
       io.to(roomId).emit('playerJoined', rooms[roomId]); // Notify all players in the room
       console.log(`Player joined room: ${roomId}`);
     } else {
       socket.emit('error', 'Room not available'); // Send an error message if room is full or doesn't exist
     }
-    if(rooms[roomId].length==2){
-      grid=generateSudoku(25);
-      puzzle=grid_to_string(grid);
-      io.to(roomId).emit('playersReady', puzzle);
+    if(rooms[roomId] && rooms[roomId].players.length==2){
+      io.to(roomId).emit('roomReady', roomId);
     }
   });
+  socket.on('playerReady', (roomId) => {
+    if (rooms[roomId]) {
+        rooms[roomId].readyCount++;
+
+        console.log(`Player ready in room: ${roomId}, Ready count: ${rooms[roomId].readyCount}`);
+
+        if (rooms[roomId].readyCount === 2) {
+            grid=generateSudoku(rooms[roomId].puzzleDifficulty);
+            puzzle=grid_to_string(grid);
+            io.to(roomId).emit('startGame', puzzle); // Emit puzzle when both players are ready
+        }
+    }
+});
 });
 
 

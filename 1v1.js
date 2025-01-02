@@ -36,6 +36,10 @@ function renderGrid(puzzle) {
 /*---------------------*/
 
 const difficulty=document.getElementById('difficulty');
+const easyBtn=document.getElementById('easy');
+const mediumBtn=document.getElementById('medium');
+const hardBtn=document.getElementById('hard');
+
 const lobbyButtons=document.getElementById('lobby-buttons');
 const username=document.getElementById('username');
 const joinRoom=document.getElementById('joinroom');
@@ -45,19 +49,60 @@ const joinBtn=document.getElementById('join');
 const createRoomBtn=document.getElementById('create-room');
 const continueBtn=document.getElementById('continue');
 const room_id=document.getElementById('room-id');
+const ready=document.getElementById('ready');
+const readyBtn=document.getElementById('readyBtn');
+
 lobbyButtons.style.display='flex';
 createRoomBtn.addEventListener('click',() =>{
-    socket.emit('createRoom');
-    socket.on('roomCreated',(roomId)=>{
-        console.log(`Room created with ID: ${roomId}`);
-        room_id.textContent=roomId;
-    });
     lobbyButtons.style.display='none';
-    username.style.display='flex';
-    continueBtn.addEventListener('click',()=>{
-        username.style.display='none';
-        createRoom.style.display='flex';
+    difficulty.style.display='flex';
+    easyBtn.addEventListener('click',()=>{
+        difficulty.style.display='none';
+        username.style.display='flex';
+        continueBtn.addEventListener('click',()=>{
+            username.style.display='none';
+            createRoom.style.display='flex';
+        });
+        socket.emit('createRoom',(25));
+        socket.on('roomCreated',(roomId)=>{
+            console.log(`Room created with ID: ${roomId}`);
+            room_id.textContent=roomId;
+        });
+    
+        
     });
+    mediumBtn.addEventListener('click',()=>{
+        difficulty.style.display='none';
+        username.style.display='flex';
+        continueBtn.addEventListener('click',()=>{
+            username.style.display='none';
+            createRoom.style.display='flex';
+        });
+        socket.emit('createRoom',(35));
+        socket.on('roomCreated',(roomId)=>{
+            console.log(`Room created with ID: ${roomId}`);
+            room_id.textContent=roomId;
+        });
+    
+        
+    });
+    hardBtn.addEventListener('click',()=>{
+        difficulty.style.display='none';
+        username.style.display='flex';
+        continueBtn.addEventListener('click',()=>{
+            username.style.display='none';
+            createRoom.style.display='flex';
+        });
+        socket.emit('createRoom',(45));
+        socket.on('roomCreated',(roomId)=>{
+            console.log(`Room created with ID: ${roomId}`);
+            room_id.textContent=roomId;
+        });
+    
+        
+    });
+
+    
 });
 joinRoomBtn.addEventListener('click',()=>{
     lobbyButtons.style.display='none';
@@ -79,6 +124,16 @@ socket.on('error', (message) => {
     console.log('Error:', message);
     alert(message);
   });
-socket.on('playersReady',(puzzle)=>{
+socket.on('roomReady',(roomId)=>{
+    joinRoom.style.display='none';
+    createRoom.style.display='none';
+    ready.style.display='flex';
+});
+readyBtn.addEventListener('click',()=>{
+    socket.emit('playerReady',(document.getElementById('room-id-input').value));
+    socket.emit('playerReady',(room_id.textContent));
+    ready.style.display='none';
+});
+socket.on('startGame',(puzzle)=>{
     renderGrid(puzzle);
 });
