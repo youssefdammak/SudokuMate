@@ -42,6 +42,7 @@ const hardBtn=document.getElementById('hard');
 
 const lobbyButtons=document.getElementById('lobby-buttons');
 const username=document.getElementById('username');
+const username_input=document.getElementById('username-input');
 const joinRoom=document.getElementById('joinroom');
 const createRoom=document.getElementById('createroom');
 const joinRoomBtn=document.getElementById('join-room');
@@ -53,23 +54,30 @@ const ready=document.getElementById('ready');
 const readyBtn=document.getElementById('readyBtn');
 
 lobbyButtons.style.display='flex';
-createRoomBtn.addEventListener('click',() =>{
-    lobbyButtons.style.display='none';
-    difficulty.style.display='flex';
-    easyBtn.addEventListener('click',()=>{
-        difficulty.style.display='none';
-        username.style.display='flex';
-        continueBtn.addEventListener('click',()=>{
-            username.style.display='none';
-            createRoom.style.display='flex';
+createRoomBtn.addEventListener('click', () => {
+    lobbyButtons.style.display = 'none';
+    difficulty.style.display = 'flex';
+
+    easyBtn.addEventListener('click', () => {
+        difficulty.style.display = 'none';
+        username.style.display = 'flex';
+
+        continueBtn.addEventListener('click', () => {
+            const usernameValue = username_input.value;
+            console.log('Captured username before emit:', usernameValue); 
+            if (!usernameValue) {
+                console.log('Error: Username is empty!'); 
+                return;
+            }
+            username.style.display = 'none';
+            createRoom.style.display = 'flex';
+            socket.emit('createRoom', 25, usernameValue);
+
+            socket.on('roomCreated', (roomId) => {
+                console.log(`Room created with ID: ${roomId}`);
+                room_id.textContent = roomId;
+            });
         });
-        socket.emit('createRoom',(25));
-        socket.on('roomCreated',(roomId)=>{
-            console.log(`Room created with ID: ${roomId}`);
-            room_id.textContent=roomId;
-        });
-    
-        
     });
     mediumBtn.addEventListener('click',()=>{
         difficulty.style.display='none';
@@ -78,7 +86,7 @@ createRoomBtn.addEventListener('click',() =>{
             username.style.display='none';
             createRoom.style.display='flex';
         });
-        socket.emit('createRoom',(35));
+        socket.emit('createRoom',35,username_input.value);
         socket.on('roomCreated',(roomId)=>{
             console.log(`Room created with ID: ${roomId}`);
             room_id.textContent=roomId;
@@ -93,7 +101,7 @@ createRoomBtn.addEventListener('click',() =>{
             username.style.display='none';
             createRoom.style.display='flex';
         });
-        socket.emit('createRoom',(45));
+        socket.emit('createRoom',45,username_input.value);
         socket.on('roomCreated',(roomId)=>{
             console.log(`Room created with ID: ${roomId}`);
             room_id.textContent=roomId;
@@ -112,13 +120,13 @@ joinRoomBtn.addEventListener('click',()=>{
         joinRoom.style.display='flex';
         joinBtn.addEventListener('click',()=>{
             const roomId = document.getElementById('room-id-input').value;
-            socket.emit('joinRoom', roomId);
+            socket.emit('joinRoom', roomId,username_input.value);
         });
     });
 });
 socket.on('playerJoined', (players) => {
-    console.log('Players in the room:', players);
-    alert('Another player joined the room!');
+    console.log('Players in the room:'+ players);
+    alert(players[1]+' joined the room!');
 });
 socket.on('error', (message) => {
     console.log('Error:', message);
@@ -134,6 +142,7 @@ readyBtn.addEventListener('click',()=>{
     socket.emit('playerReady',(room_id.textContent));
     ready.style.display='none';
 });
+const game_header=document.getElementById('game-header');
 socket.on('startGame',(puzzle)=>{
     renderGrid(puzzle);
 });

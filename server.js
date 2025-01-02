@@ -266,11 +266,12 @@ let rooms = {}; // Object to track rooms and their players
 io.on('connection',(socket)=>{
   console.log('A user connected :',socket.id);
   
-  socket.on('createRoom',(difficulty)=>{
+  socket.on('createRoom',(difficulty,username)=>{
     const roomId=Math.random().toString(36).substring(2,6);
     socket.join(roomId);
     rooms[roomId]={
       players : [socket.id],
+      usernames: [username],
       puzzleDifficulty : difficulty,
       readyCount:0,
     };
@@ -278,11 +279,14 @@ io.on('connection',(socket)=>{
     socket.emit('roomCreated', roomId);
   });
 
-  socket.on('joinRoom',(roomId)=>{
+  socket.on('joinRoom',(roomId,username)=>{
     if(rooms[roomId] && rooms[roomId].players.length<2){
       socket.join(roomId);
       rooms[roomId].players.push(socket.id);
-      io.to(roomId).emit('playerJoined', rooms[roomId]); // Notify all players in the room
+      rooms[roomId].usernames.push(username);
+      if (rooms[roomId].players.length>1){
+        io.to(rooms[roomId].players[0]).emit('playerJoined', rooms[roomId].usernames); // Notify all players in the room
+      }
       console.log(`Player joined room: ${roomId}`);
     } else {
       socket.emit('error', 'Room not available'); // Send an error message if room is full or doesn't exist
