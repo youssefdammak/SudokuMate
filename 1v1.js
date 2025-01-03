@@ -80,7 +80,7 @@ createRoomBtn.addEventListener('click', () => {
             }
             username.style.display = 'none';
             createRoom.style.display = 'flex';
-            socket.emit('createRoom', 0, usernameValue);
+            socket.emit('createRoom', 25, usernameValue);
 
             socket.on('roomCreated', (roomId) => {
                 console.log(`Room created with ID: ${roomId}`);
