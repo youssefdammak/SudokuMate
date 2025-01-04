@@ -122,6 +122,45 @@ else if (req.url === '/1v1.js') {
       return res.end();
     });
 }
+else if (req.url === '/solver.html') {
+
+  fs.readFile('solver.html', function (err, data) {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.write('404 Not Found');
+      return res.end();
+    }
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(data);
+    return res.end();
+  });
+}
+else if (req.url === '/solver.css') {
+
+  fs.readFile('solver.css', function (err, data) {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.write('404 Not Found');
+      return res.end();
+    }
+    res.writeHead(200, { 'Content-Type': 'text/css' });
+    res.write(data);
+    return res.end();
+  });
+}
+else if (req.url === '/solver.js') {
+
+  fs.readFile('solver.js', function (err, data) {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.write('404 Not Found');
+      return res.end();
+    }
+    res.writeHead(200, { 'Content-Type': 'text/js' });
+    res.write(data);
+    return res.end();
+  });
+}
 else {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.write('404 Not Found');
