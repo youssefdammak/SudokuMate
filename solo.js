@@ -163,28 +163,34 @@ const solutionBtn=document.getElementById('solution');
 const easyBtn=document.getElementById('easy');
 const mediumBtn=document.getElementById('medium');
 const hardBtn=document.getElementById('hard');
-
+const normalBtn=document.getElementById('normal');
+const timedBtn=document.getElementById('timed');
+const survivalBtn=document.getElementById('survival');
+const difficulty=document.getElementById('difficulty');
+const modes=document.getElementById('modes');
 let grid,puzzle,solved_puzzle, originalPuzzle, userPuzzle;
-
-easyBtn.addEventListener('click', () => {
-    grid=generateSudoku(25);
-    puzzle=grid_to_string(grid);
-    originalPuzzle=puzzle;
-    renderGrid(puzzle);
+normalBtn.addEventListener('click',()=>{
+    difficulty.style.display='flex';
+    modes.style.display='none';
+    easyBtn.addEventListener('click', () => {
+        grid=generateSudoku(25);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+    mediumBtn.addEventListener('click', () => {
+        grid=generateSudoku(35);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+    hardBtn.addEventListener('click', () => {
+        grid=generateSudoku(45);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
 });
-mediumBtn.addEventListener('click', () => {
-    grid=generateSudoku(35);
-    puzzle=grid_to_string(grid);
-    originalPuzzle=puzzle;
-    renderGrid(puzzle);
-});
-hardBtn.addEventListener('click', () => {
-    grid=generateSudoku(45);
-    puzzle=grid_to_string(grid);
-    originalPuzzle=puzzle;
-    renderGrid(puzzle);
-});
-
 solutionBtn.addEventListener('click', ()=>{
     solve(grid);
     solved_puzzle=grid_to_string(grid);
