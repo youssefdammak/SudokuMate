@@ -160,6 +160,7 @@ function grid_to_string(grid){
 const validateBtn=document.getElementById('validate');
 const resetBtn=document.getElementById('reset');
 const solutionBtn=document.getElementById('solution');
+const game_buttons=document.getElementById('game-buttons');
 const easyBtn=document.getElementById('easy');
 const mediumBtn=document.getElementById('medium');
 const hardBtn=document.getElementById('hard');
@@ -168,7 +169,14 @@ const timedBtn=document.getElementById('timed');
 const survivalBtn=document.getElementById('survival');
 const difficulty=document.getElementById('difficulty');
 const modes=document.getElementById('modes');
+const time_choice=document.getElementById('time_choice');
+const fiveBtn=document.getElementById('5min');
+const tenBtn=document.getElementById('10min');
+const fifteenBtn=document.getElementById('15min');
+const timer=document.getElementById('timer');
+const timer_box=document.getElementById('timer-box');
 let grid,puzzle,solved_puzzle, originalPuzzle, userPuzzle;
+
 normalBtn.addEventListener('click',()=>{
     difficulty.style.display='flex';
     modes.style.display='none';
@@ -191,10 +199,53 @@ normalBtn.addEventListener('click',()=>{
         renderGrid(puzzle);
     });
 });
+timedBtn.addEventListener('click',()=>{
+    difficulty.style.display='flex';
+    modes.style.display='none';
+    easyBtn.addEventListener('click', () => {
+        time_choice.style.display='flex';
+        difficulty.style.display='none';
+        fiveBtn.addEventListener('click',()=>{
+            timer.style.display='flex';
+            timer_box.textContent='300';
+            time_choice.style.display='none';
+            grid=generateSudoku(25);
+            puzzle=grid_to_string(grid);
+            originalPuzzle=puzzle;
+            renderGrid(puzzle);
+            let current_time=10;
+            const time = setInterval(() => {
+                if (current_time <= 0) {
+                    clearInterval(time);
+                    alert("Time's up! Press Ok to see the solution");
+                    solve(grid);
+                    solved_puzzle=grid_to_string(grid);
+                    getSolution(solved_puzzle,puzzle);
+                    game_buttons.style.display='none';
+                } else {
+                    current_time--;
+                    timer_box.textContent = current_time;
+                }
+            }, 1000);
+        });
+    });
+    mediumBtn.addEventListener('click', () => {
+        grid=generateSudoku(35);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+    hardBtn.addEventListener('click', () => {
+        grid=generateSudoku(45);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+});
 solutionBtn.addEventListener('click', ()=>{
     solve(grid);
     solved_puzzle=grid_to_string(grid);
-    getSolution(solved_puzzle,puzzle)
+    getSolution(solved_puzzle,puzzle);
 });
 resetBtn.addEventListener('click', () => {
     renderGrid(originalPuzzle);
