@@ -202,6 +202,7 @@ normalBtn.addEventListener('click',()=>{
 timedBtn.addEventListener('click',()=>{
     difficulty.style.display='flex';
     modes.style.display='none';
+    solutionBtn.remove();
     easyBtn.addEventListener('click', () => {
         time_choice.style.display='flex';
         difficulty.style.display='none';
