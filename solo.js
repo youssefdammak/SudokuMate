@@ -207,69 +207,99 @@ timedBtn.addEventListener('click',()=>{
         difficulty.style.display='none';
         fiveBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='300';
+            timer_box.textContent='05:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=300;
+            let current_time = '05:00';
+            let seconds = 0;
+            let minutes = 5;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
         });
         tenBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='600';
+            timer_box.textContent='10:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=600;
+            let current_time = '10:00';
+            let seconds = 0;
+            let minutes = 10;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
         });
         fifteenBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='900';
+            timer_box.textContent='15:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=900;
+            let current_time = '15:00';
+            let seconds = 0;
+            let minutes = 15;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
@@ -280,69 +310,99 @@ timedBtn.addEventListener('click',()=>{
         difficulty.style.display='none';
         fiveBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='300';
+            timer_box.textContent='05:00';
             time_choice.style.display='none';
             grid=generateSudoku(35);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=300;
+            let current_time = '05:00';
+            let seconds = 0;
+            let minutes = 5;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
         });
         tenBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='600';
+            timer_box.textContent='10:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=600;
+            let current_time = '10:00';
+            let seconds = 0;
+            let minutes = 10;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
         });
         fifteenBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='900';
+            timer_box.textContent='15:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=900;
+            let current_time = '15:00';
+            let seconds = 0;
+            let minutes = 15;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
@@ -353,69 +413,99 @@ timedBtn.addEventListener('click',()=>{
         difficulty.style.display='none';
         fiveBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='300';
+            timer_box.textContent='05:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=300;
+            let current_time = '05:00';
+            let seconds = 0;
+            let minutes = 5;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
         });
         tenBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='600';
+            timer_box.textContent='10:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=600;
+            let current_time = '10:00';
+            let seconds = 0;
+            let minutes = 10;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
         });
         fifteenBtn.addEventListener('click',()=>{
             timer.style.display='flex';
-            timer_box.textContent='900';
+            timer_box.textContent='15:00';
             time_choice.style.display='none';
             grid=generateSudoku(25);
             puzzle=grid_to_string(grid);
             originalPuzzle=puzzle;
             renderGrid(puzzle);
-            let current_time=900;
+            let current_time = '15:00';
+            let seconds = 0;
+            let minutes = 15;
             const time = setInterval(() => {
-                if (current_time <= 0) {
+                if (minutes === 0 && seconds === 0) {
                     clearInterval(time);
                     alert("Time's up! Press Ok to see the solution");
                     solve(grid);
-                    solved_puzzle=grid_to_string(grid);
-                    getSolution(solved_puzzle,puzzle);
-                    game_buttons.style.display='none';
+                    solved_puzzle = grid_to_string(grid);
+                    getSolution(solved_puzzle, puzzle);
+                    game_buttons.style.display = 'none';
                 } else {
-                    current_time--;
+                    if (seconds === 0) {
+                        minutes -= 1;
+                        seconds = 59;
+                    } else {
+                        seconds -= 1;
+                    }
+                    const formattedMinutes = minutes.toString().padStart(2, '0');
+                    const formattedSeconds = seconds.toString().padStart(2, '0');
+                    current_time = `${formattedMinutes}:${formattedSeconds}`;
                     timer_box.textContent = current_time;
                 }
             }, 1000);
