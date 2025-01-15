@@ -175,8 +175,10 @@ const tenBtn=document.getElementById('10min');
 const fifteenBtn=document.getElementById('15min');
 const timer=document.getElementById('timer');
 const timer_box=document.getElementById('timer-box');
+const hearts=document.getElementById('hearts');
 let grid,puzzle,solved_puzzle, originalPuzzle, userPuzzle;
-
+let isSurvival=false;
+let heartNumber=3;
 normalBtn.addEventListener('click',()=>{
     difficulty.style.display='flex';
     modes.style.display='none';
@@ -193,6 +195,36 @@ normalBtn.addEventListener('click',()=>{
         renderGrid(puzzle);
     });
     hardBtn.addEventListener('click', () => {
+        grid=generateSudoku(45);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+});
+survivalBtn.addEventListener('click',()=>{
+    isSurvival=true;
+    modes.style.display='none';
+    difficulty.style.display='flex';
+    solutionBtn.remove();
+    easyBtn.addEventListener('click', () => {
+        hearts.style.display='flex';
+        difficulty.style.display='none';
+        grid=generateSudoku(25);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+    mediumBtn.addEventListener('click', () => {
+        hearts.style.display='flex';
+        difficulty.style.display='none';
+        grid=generateSudoku(35);
+        puzzle=grid_to_string(grid);
+        originalPuzzle=puzzle;
+        renderGrid(puzzle);
+    });
+    hardBtn.addEventListener('click', () => {
+        hearts.style.display='flex';
+        difficulty.style.display='none';
         grid=generateSudoku(45);
         puzzle=grid_to_string(grid);
         originalPuzzle=puzzle;
@@ -536,7 +568,22 @@ validateBtn.addEventListener('click', ()=>{
     }
     solve(grid);
     solved_puzzle=grid_to_string(grid);
-    if(solved_puzzle===userPuzzle){
+    if (solved_puzzle===userPuzzle && isSurvival==true){
+        alert("Correct! 🎉");
+        game_buttons.style.display = 'none';
+    }
+    else if (isSurvival==true){
+        heartNumber--;
+        hearts.lastElementChild.remove();
+        if (heartNumber==0){
+            alert("You Lost! ❌, Press OK to see the solution")
+            solve(grid);
+            solved_puzzle = grid_to_string(grid);
+            getSolution(solved_puzzle, puzzle);
+            game_buttons.style.display = 'none';
+        }
+    }
+    else if(solved_puzzle===userPuzzle){
         alert("Correct! 🎉");
     }
     else{
